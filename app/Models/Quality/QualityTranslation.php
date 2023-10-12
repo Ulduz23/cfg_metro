@@ -1,10 +1,10 @@
 <?php
 
-namespace App\Models\Project;
+namespace App\Models\Quality;
 
 use Illuminate\Database\Eloquent\Model;
 
-class ProjectTranslation extends Model
+class QualityTranslation extends Model
 {
     public $fillable = [
         'description'
