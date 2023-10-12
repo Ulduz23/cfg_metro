@@ -22,7 +22,7 @@ return new class extends Migration
         Schema::create('qualities_translation', function (Blueprint $table) {
             $table->increments('id');
 
-            $table->unsignedInteger('projects_id');
+            $table->unsignedInteger('qualities_id');
             $table->string('locale')->index();
 
             $table->string('description');
