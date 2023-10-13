@@ -2,30 +2,29 @@
 
 namespace App\Http\Controllers;
 
-use App\Http\Requests\StoreContactRequest;
-use App\Http\Requests\UpdateContactRequest;
-use App\Http\Resources\ContactResource;
+use Illuminate\Http\Request;
 use App\Models\Contact\Contact;
+use App\Policies\ContactPolicy;
+use Illuminate\Support\Facades\Auth;
+use App\Http\Resources\ContactResource;
+use App\Http\Requests\StoreContactRequest;
 
 class ContactController extends Controller
 {
     public function __construct()
     {
-        $this->middleware('auth:web')->only([
-            'index',
-            'show',
-            'destroy',
-        ]);
-        
+        $this->middleware('auth:web')->only(['index', 'show', 'destroy']);
         $this->middleware('verify.accept.only.json.request')->only('store');
     }
 
     /**
      * Display a listing of the resource.
      */
-    public function index()
+    public function index(Contact $contact)
     {
+        $this->authorize('view', $contact);
         
+        return view('admin.contacts.index');
     }
 
     /**
@@ -41,7 +40,9 @@ class ContactController extends Controller
      */
     public function show(Contact $contact)
     {
-        //
+        $this->authorize('show', $contact);
+
+        return view('admin.contacts.show');
     }
 
     /**

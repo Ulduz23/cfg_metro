@@ -17,8 +17,6 @@ use Illuminate\Support\Facades\Route;
 
 Route::prefix('/v1')->group(function() {
 
-    Route::apiResource('/contacts', ContactController::class)->except([
-        'update'
-    ]);
+    Route::apiResource('/contacts', ContactController::class)->only('store');
 
 });
