@@ -14,7 +14,7 @@ class ContactController extends Controller
         $this->middleware('auth:web')->only([
             'index',
             'show',
-            'destroy'
+            'destroy',
         ]);
         
         $this->middleware('verify.accept.only.json.request')->only('store');
@@ -49,6 +49,8 @@ class ContactController extends Controller
      */
     public function destroy(Contact $contact)
     {
-        //
+        $this->authorize('delete', $contact);
+
+        $contact->delete();
     }
 }
