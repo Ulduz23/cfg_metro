@@ -20,16 +20,16 @@ return new class extends Migration
             $table->timestamps();
         });
 
-        Schema::create('contacts_translation', function (Blueprint $table) {
+        Schema::create('contact_translations', function (Blueprint $table) {
             $table->increments('id');
             
-            $table->unsignedInteger('contacts_id');
+            $table->unsignedInteger('contact_id');
             $table->string('locale')->index();
 
             $table->string('address');
 
-            $table->unique(['contacts_id', 'locale']);
-            $table->foreign('contacts_id')->references('id')->on('contacts')->onDelete('cascade');
+            $table->unique(['contact_id', 'locale']);
+            $table->foreign('contact_id')->references('id')->on('contacts')->onDelete('cascade');
         });
     }
 
