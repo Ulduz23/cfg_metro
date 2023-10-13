@@ -14,8 +14,20 @@ use App\Http\Controllers\ContactController;
 |
 */
 
-Route::resource('/contacts', ContactController::class)->only([
-    'index',
-    'show',
-    'destroy'
-]);
+Route::middleware('set.language')->prefix('/')->group(function() {
+    Route::resource('/contacts', ContactController::class)->only([
+        'index',
+        'show',
+        'destroy'
+    ]);
+    
+    Route::get('/{lang}', function($lang) {
+        if (in_array($lang, config('translatable.locales')))
+        {
+            app()->setLocale($lang);
+            session()->put('locale', $lang);
+        }
+
+        return redirect('/');
+    });
+});

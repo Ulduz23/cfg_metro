@@ -32,7 +32,9 @@ class ContactController extends Controller
      */
     public function store(StoreContactRequest $request)
     {   
-        return new ContactResource(Contact::create($request->all()));
+        return (new ContactResource(Contact::create($request->all())))->additional([
+            'message' => __('lang.created.success')
+        ]);
     }
 
     /**

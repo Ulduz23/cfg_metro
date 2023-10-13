@@ -15,7 +15,7 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::prefix('/v1')->group(function() {
+Route::middleware(['set.language'])->prefix('/v1')->group(function() {
 
     Route::apiResource('/contacts', ContactController::class)->only('store');
 

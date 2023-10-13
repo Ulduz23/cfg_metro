@@ -16,7 +16,7 @@ class VerifyAcceptOnlyJsonRequest
      */
     public function handle(Request $request, Closure $next): Response
     {
-        $e = new NotAcceptableHttpException('Not Acceptable');
+        $e = new NotAcceptableHttpException(__('lang.notAcceptable', ['accept' => $request->header('Accept')]));
 
         switch($request->header('Accept'))
         {
