@@ -19,6 +19,18 @@ return new class extends Migration
 
             $table->timestamps();
         });
+
+        Schema::create('gallery_translations', function (Blueprint $table) {
+            $table->increments('id');
+
+            $table->unsignedInteger('gallery_id');
+            $table->string('locale')->index();
+
+            $table->string('title');
+
+            $table->unique(['gallery_id', 'locale']);
+            $table->foreign('gallery_id')->references('id')->on('galleries')->onDelete('cascade');
+        });
     }
 
     /**

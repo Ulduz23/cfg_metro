@@ -1,16 +1,17 @@
 <?php
 
-namespace App\Models;
+namespace App\Models\Gallery;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class Gallery extends Model
+class GalleryTranslation extends Model
 {
     use HasFactory;
 
     protected $fillable = [
-        'image',
-        'status'
+        'title'
     ];
+
+    public $timestamps = false;
 }
