@@ -36,10 +36,10 @@ return [
             'throw' => false,
         ],
 
-        'public' => [
+        'uploads' => [
             'driver' => 'local',
-            'root' => storage_path('app/public'),
-            'url' => env('APP_URL').'/storage',
+            'root' => storage_path('app/uploads'),
+            'url' => env('APP_URL') . '/uploads',
             'visibility' => 'public',
             'throw' => false,
         ],
@@ -70,7 +70,7 @@ return [
     */
 
     'links' => [
-        public_path('storage') => storage_path('app/public'),
+        public_path('uploads') => storage_path('app/uploads'),
     ],
 
 ];

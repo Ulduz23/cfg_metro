@@ -11,7 +11,7 @@ class UpdateGalleryRequest extends FormRequest
      */
     public function authorize(): bool
     {
-        return false;
+        return true;
     }
 
     /**
@@ -21,8 +21,19 @@ class UpdateGalleryRequest extends FormRequest
      */
     public function rules(): array
     {
-        return [
-            //
+        $locales = config('translatable.locales');
+
+        $rules = [
+            'image' => ['image', 'max:1024', 'dimensions:ratio=1/1,min_width=650,min_height=650'],
         ];
+
+        foreach ($locales as $locale) {
+            $rules = [
+                $locale => ['array'],
+                "$locale.title" => ['string', 'max:255']
+            ];
+        }
+
+        return $rules;
     }
 }

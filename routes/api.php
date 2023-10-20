@@ -1,8 +1,9 @@
 <?php
 
-use App\Http\Controllers\ContactController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\ContactController;
+use App\Http\Controllers\GalleryController;
 
 /*
 |--------------------------------------------------------------------------
@@ -15,8 +16,11 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::middleware(['set.language'])->prefix('/v1')->group(function() {
+Route::middleware(['set.language'])->prefix('/v1')->group(function () {
 
     Route::apiResource('/contacts', ContactController::class)->only('store');
-
+    Route::apiResource('/gallery', GalleryController::class)->only([
+        'index',
+        'show'
+    ]);
 });

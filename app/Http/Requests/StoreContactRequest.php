@@ -23,13 +23,13 @@ class StoreContactRequest extends FormRequest
     {
         $locales = config('translatable.locales');
         $rules = [
-            'phone' => 'required',
-            'email' => 'required'
+            'phone' => ['required', 'string', 'max:25'],
+            'email' => ['required', 'string', 'max:100']
         ];
 
-        foreach($locales as $locale) {
+        foreach ($locales as $locale) {
             $rules[$locale] = ['required', 'array'];
-            $rules["$locale.address"] = ['required', 'string', 'min:0', 'max:255']; 
+            $rules["$locale.address"] = ['required', 'string', 'min:0', 'max:255'];
         }
 
         return $rules;
