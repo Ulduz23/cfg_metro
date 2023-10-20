@@ -8,20 +8,14 @@ use Illuminate\Auth\Access\Response;
 
 class GalleryPolicy
 {
-    /**
-     * Determine whether the user can view any models.
-     */
-    public function viewAny(User $user): bool
+    public function view(User $user): bool
     {
-        //
+        return $user->can('view any gallery item');
     }
 
-    /**
-     * Determine whether the user can view the model.
-     */
-    public function view(User $user, Gallery $gallery): bool
+    public function list(User $user): bool
     {
-        //
+        return $user->can('show gallery list');
     }
 
     /**
@@ -37,30 +31,24 @@ class GalleryPolicy
      */
     public function update(User $user, Gallery $gallery): bool
     {
-        return $user->hasRole('admin');
+        return $user->can('update a gallery item')
     }
 
     /**
      * Determine whether the user can delete the model.
      */
-    public function delete(User $user, Gallery $gallery): bool
+    public function destroy(User $user, Gallery $gallery): bool
     {
-        //
+        return $user->can('delete a gallery item');
     }
 
-    /**
-     * Determine whether the user can restore the model.
-     */
-    public function restore(User $user, Gallery $gallery): bool
+    public function store(User $user)
     {
-        //
+        return $user->can('store new gallery item');
     }
 
-    /**
-     * Determine whether the user can permanently delete the model.
-     */
-    public function forceDelete(User $user, Gallery $gallery): bool
+    public function edit(User $user)
     {
-        //
+        return $user->can('edit a gallery item');
     }
 }

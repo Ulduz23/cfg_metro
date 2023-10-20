@@ -23,6 +23,8 @@ class GalleryController extends Controller
 
     public function list()
     {
+        $this->authorize('list', new Gallery);
+
         return view('gallery.list');
     }
 
@@ -36,6 +38,8 @@ class GalleryController extends Controller
 
     public function create()
     {
+        $this->authorize('create', new Gallery);
+
         return view('gallery.create');
     }
 
@@ -63,11 +67,15 @@ class GalleryController extends Controller
 
     public function view(Gallery $gallery)
     {
+        $this->authorize('view', $gallery);
+
         return view('gallery.view');
     }
 
     public function edit(Gallery $gallery)
     {
+        $this->authorize('edit', $gallery);
+
         return view('gallery.update', [
             'gallery' => $gallery
         ]);
