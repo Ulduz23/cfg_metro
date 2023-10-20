@@ -33,7 +33,7 @@ class GalleryController extends Controller
      */
     public function index()
     {
-        return new GalleryResource(Gallery::paginate(10));
+        return GalleryResource::collection(Gallery::paginate(10));
     }
 
     public function create()
