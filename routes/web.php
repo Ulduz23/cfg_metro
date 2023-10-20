@@ -42,7 +42,7 @@ Route::middleware('set.language')->prefix('/')->group(function () {
             Route::get('/create', [SlideController::class, 'create'])->name('slide.create');
             Route::post('/', [SlideController::class, 'store'])->name('slide.store');
             Route::get('/{slide}/edit', [SlideController::class, 'edit'])->name('slide.edit');
-            Route::match(['put', 'patch'], '/', [SlideController::class, 'update'])->name('slide.update');
+            Route::match(['put', 'patch'], '/{slide}', [SlideController::class, 'update'])->name('slide.update');
             Route::delete('/{slide}', [SlideController::class, 'destroy'])->name('slide.destroy');
         });
     });
