@@ -10,8 +10,7 @@ use App\Http\Requests\UpdateGalleryRequest;
 
 class GalleryController extends Controller
 {
-    public $disk = 'uploads';
-    public $imagesPath = 'gallery';
+    private $imagesPath = 'gallery';
 
     public function __construct()
     {
@@ -46,13 +45,16 @@ class GalleryController extends Controller
     /**
      * Store a newly created resource in storage.
      */
-    public function store(StoreGalleryRequest $request)
+    public function store(StoreGalleryRequest $request, Gallery $gallery)
     {
         $this->authorize('create', new Gallery());
 
         $data = $request->all();
 
-        $data['image'] = $request->image->store($this->imagesPath, $this->disk);
+        $data['image'] = $request->image->store(
+            $this->imagesPath,
+            $gallery->getDiskName()
+        );
 
         return new GalleryResource(Gallery::create($data));
     }
@@ -97,7 +99,7 @@ class GalleryController extends Controller
             $data['image'] = $request->image->storeAs(
                 $this->imagesPath,
                 $imageName,
-                $this->disk
+                $gallery->getDiskName()
             );
         }
 

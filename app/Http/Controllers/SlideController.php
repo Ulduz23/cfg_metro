@@ -9,7 +9,6 @@ use App\Models\Slide\Slide;
 
 class SlideController extends Controller
 {
-    private $disk = 'uploads';
     private $path = 'slides/';
 
     public function list(Slide $slide)
@@ -39,15 +38,15 @@ class SlideController extends Controller
     /**
      * Store a newly created resource in storage.
      */
-    public function store(StoreSlideRequest $request)
+    public function store(StoreSlideRequest $request, Slide $slide)
     {
-        $this->authorize('store', new Slide);
+        $this->authorize('store', $slide);
 
         $data = $request->all();
 
         $data['image'] = $request->image->store(
             $this->path,
-            $this->disk
+            $slide->getDiskName()
         );
 
         return new SlideResource(Slide::create($data));
@@ -93,7 +92,7 @@ class SlideController extends Controller
             $data['image'] = $request->image->storeAs(
                 $this->path,
                 $imageName,
-                $this->disk
+                $slide->getDiskName()
             );
         }
 

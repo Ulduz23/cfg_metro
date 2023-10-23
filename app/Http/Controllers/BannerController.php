@@ -10,8 +10,7 @@ use Illuminate\Support\Facades\Storage;
 
 class BannerController extends Controller
 {
-    private $disk = 'uploads';
-    private $path = 'banners/';
+    private $path = 'images/';
 
     public function list()
     {
@@ -37,15 +36,15 @@ class BannerController extends Controller
     /**
      * Store a newly created resource in storage.
      */
-    public function store(StoreBannerRequest $request)
+    public function store(StoreBannerRequest $request, Banner $banner)
     {
-        $this->authorize('store', new Banner);
+        $this->authorize('store', $banner);
 
         $data = $request->all();
 
         $data['image'] = $request->image->store(
             $this->path,
-            $this->disk
+            $banner->getDiskName()
         );
 
         return new BannerResource(Banner::create($data));
@@ -92,7 +91,7 @@ class BannerController extends Controller
             $data['image'] = $request->image->storeAs(
                 $this->path,
                 $imageName,
-                $this->disk
+                $banner->getDiskName()
             );
         }
 
