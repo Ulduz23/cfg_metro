@@ -11,7 +11,9 @@ class Project extends Model implements TranslatableContract
 {
     use HasFactory;
     use Translatable;
-    
+
+    private $disk = 'projects';
+
     protected $fillable = [
         'image',
         'status',
@@ -21,4 +23,9 @@ class Project extends Model implements TranslatableContract
         'title',
         'content',
     ];
+
+    public function getDiskName()
+    {
+        return $this->disk;
+    }
 }

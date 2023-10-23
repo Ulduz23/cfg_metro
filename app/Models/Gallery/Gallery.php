@@ -12,6 +12,8 @@ class Gallery extends Model implements TranslatableContract
     use HasFactory;
     use Translatable;
 
+    private $disk = 'gallery';
+
     protected $fillable = [
         'image',
         'status'
@@ -20,4 +22,9 @@ class Gallery extends Model implements TranslatableContract
     public $translatedAttributes = [
         'title'
     ];
+
+    public function getDiskName()
+    {
+        return $this->disk;
+    }
 }

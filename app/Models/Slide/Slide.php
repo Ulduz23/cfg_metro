@@ -12,6 +12,8 @@ class Slide extends Model implements TranslatableContract
     use HasFactory;
     use Translatable;
 
+    private $disk = 'slides';
+
     protected $fillable = [
         'image',
         'disk'
@@ -20,4 +22,9 @@ class Slide extends Model implements TranslatableContract
     public $translatedAttributes = [
         'title'
     ];
+
+    public function getDiskName()
+    {
+        return $this->disk;
+    }
 }

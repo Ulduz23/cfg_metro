@@ -12,9 +12,10 @@ class Banner extends Model implements TranslatableContract
     use HasFactory;
     use Translatable;
 
+    private $disk = 'banners';
+
     protected $fillable = [
         'image',
-        'disk',
         'link',
         'status',
 
@@ -24,4 +25,9 @@ class Banner extends Model implements TranslatableContract
         'title',
         'description'
     ];
+
+    public function getDiskName()
+    {
+        return $this->disk;
+    }
 }
