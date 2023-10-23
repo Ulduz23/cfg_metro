@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\BannerController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\ContactController;
 use App\Http\Controllers\GalleryController;
@@ -44,6 +45,16 @@ Route::middleware('set.language')->prefix('/')->group(function () {
             Route::get('/{slide}/edit', [SlideController::class, 'edit'])->name('slide.edit');
             Route::match(['put', 'patch'], '/{slide}', [SlideController::class, 'update'])->name('slide.update');
             Route::delete('/{slide}', [SlideController::class, 'destroy'])->name('slide.destroy');
+        });
+
+        Route::prefix('/banner')->group(function () {
+            Route::get('/', [BannerController::class, 'list'])->name('banner.list');
+            Route::get('/{banner}', [BannerController::class, 'view'])->name('banner.view');
+            Route::get('/create', [BannerController::class, 'create'])->name('banner.create');
+            Route::post('/', [BannerController::class, 'store'])->name('banner.store');
+            Route::get('/{banner}/edit', [BannerController::class, 'edit'])->name('banner.edit');
+            Route::match(['put', 'patch'], '/{banner}', [BannerController::class, 'update'])->name('banner.update');
+            Route::delete('/{banner}', [BannerController::class, 'destroy'])->name('banner.destroy');
         });
     });
 

@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\BannerController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\ContactController;
@@ -25,6 +26,10 @@ Route::middleware(['set.language'])->prefix('/v1')->group(function () {
         'show'
     ]);
     Route::apiResource('/slides', SlideController::class)->only([
+        'index',
+        'show'
+    ]);
+    Route::apiResource('/banner', BannerController::class)->only([
         'index',
         'show'
     ]);

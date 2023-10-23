@@ -11,26 +11,29 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('slides', function (Blueprint $table) {
+        Schema::create('banners', function (Blueprint $table) {
+
             $table->increments('id');
 
             $table->string('disk');
             $table->string('image');
+            $table->string('link');
             $table->boolean('status')->default(false);
 
             $table->timestamps();
         });
 
-        Schema::create('slide_translations', function (Blueprint $table) {
+        Schema::create('banner_translations', function (Blueprint $table) {
             $table->increments('id');
 
-            $table->unsignedInteger('slide_id');
+            $table->unsignedInteger('banner_id');
             $table->string('locale')->index();
 
-            $table->string('title', 50);
+            $table->string('title');
+            $table->string('description');
 
-            $table->unique(['slide_id', 'locale']);
-            $table->foreign('slide_id')->references('id')->on('slides')->onDelete('cascade');
+            $table->unique(['banner_id', 'locale']);
+            $table->foreign('banner_id')->references('id')->on('banners')->onDelete('cascade');
         });
     }
 
@@ -39,6 +42,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('slides');
+        Schema::dropIfExists('banners');
     }
 };
