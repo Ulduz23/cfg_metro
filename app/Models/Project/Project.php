@@ -6,6 +6,7 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Astrotomic\Translatable\Contracts\Translatable as TranslatableContract;
 use Astrotomic\Translatable\Translatable;
+use Illuminate\Database\Eloquent\Casts\Attribute;
 
 class Project extends Model implements TranslatableContract
 {
@@ -19,6 +20,10 @@ class Project extends Model implements TranslatableContract
         'status',
     ];
 
+    protected $casts = [
+        'status' => 'boolean'
+    ];
+
     public $translatedAttributes = [
         'title',
         'content',
@@ -27,5 +32,12 @@ class Project extends Model implements TranslatableContract
     public function getDiskName()
     {
         return $this->disk;
+    }
+
+    public function image(): Attribute
+    {
+        return Attribute::make(
+            get: fn (string $value) => Storage::disk($this->disk)->url($value)
+        );
     }
 }

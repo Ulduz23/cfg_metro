@@ -16,6 +16,10 @@ class Station extends Model implements TranslatableContract
         'status'
     ];
 
+    protected $casts = [
+        'status' => 'boolean'
+    ];
+
     public $translatedAttributes = [
         'name'
     ];

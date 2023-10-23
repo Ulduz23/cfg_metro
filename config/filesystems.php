@@ -68,6 +68,30 @@ return [
             'throw' => false,
         ],
 
+        'about' => [
+            'driver' => 'local',
+            'root' => storage_path('app/public/about'),
+            'url' => env('APP_URL') . '/storage/about',
+            'visibility' => 'public',
+            'throw' => false,
+        ],
+
+        'news' => [
+            'driver' => 'local',
+            'root' => storage_path('app/public/news'),
+            'url' => env('APP_URL') . '/storage/news',
+            'visibility' => 'public',
+            'throw' => false,
+        ],
+
+        'quality' => [
+            'driver' => 'local',
+            'root' => storage_path('app/public/quality_icons'),
+            'url' => env('APP_URL') . '/storage/quality_icons',
+            'visibility' => 'public',
+            'throw' => false,
+        ],
+
         's3' => [
             'driver' => 's3',
             'key' => env('AWS_ACCESS_KEY_ID'),
