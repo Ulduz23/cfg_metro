@@ -38,6 +38,6 @@ class Gallery extends Model implements TranslatableContract
     {
         return Attribute::make(
             get: fn (string $value) => Storage::disk($this->disk)->url($value)
-        )
+        );
     }
 }
